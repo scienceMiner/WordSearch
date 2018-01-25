@@ -19,6 +19,7 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -217,13 +218,13 @@ public class InputDialog extends JDialog implements PropertyChangeListener {
 		}
 		else if (evt.getPropertyName().equals("sizeList"))
 		{
-			sizeList((String) evt.getNewValue());
+			sizeList((Integer) evt.getNewValue());
 		}
 								
 	}
 
 
-	private void sizeList(String gridSize) {
+	private void sizeList(Integer gridSize) {
 		okButton.setText("Generate Board, size" + gridSize + " X " + gridSize );
 		
 	}
@@ -238,7 +239,34 @@ public class InputDialog extends JDialog implements PropertyChangeListener {
 		}
 		
 		ArrayList<String> myWords = new ArrayList<String>(words);
-		_c.createGrid(myWords, title, gridSize);
+		ArrayList<String> longWords = new ArrayList<String>();
+		
+		boolean readyToRun = true;
+		
+		for (String word : words)
+		{
+			if (word.length() > gridSize)
+			{
+				longWords.add(word);
+				readyToRun = false;
+			}
+		}
+		
+		if (readyToRun)
+			_c.createGrid(myWords, title, gridSize);
+		else
+		{
+			
+			for (String longWord : longWords)
+			{
+				words.remove(longWord);
+			}
+			
+			JOptionPane.showMessageDialog(null,"Word is too long for grid - please reenter ");
+			
+			updateTextArea();
+			wordField.setText("");
+		}
 		
 		return null;
 		
