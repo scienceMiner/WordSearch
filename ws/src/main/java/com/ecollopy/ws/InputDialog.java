@@ -135,7 +135,7 @@ public class InputDialog extends JDialog implements PropertyChangeListener {
 		JPanel titlePanel = new JPanel(new BorderLayout(2,2));
 		
 		JLabel titleLabel = new JLabel();
-		titleLabel.setText(" Enter PUzzle Title: " );
+		titleLabel.setText(" Enter Puzzle Title: " );
 		titlePanel.add(titleLabel,BorderLayout.LINE_START);
 		titlePanel.add(titleField, BorderLayout.CENTER );
 		

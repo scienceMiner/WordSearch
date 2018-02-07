@@ -403,12 +403,19 @@ _ii) randomly place it must fit current
 		
 	}
 	
-	
+	public String getFileLocation()
+	{
+		String fileName = "WordSearchPuzzle.pdf";
+		String userHomeFolder = System.getProperty("user.home");
+		
+		return userHomeFolder + "/" + fileName;
+	}
 	
 	public void insertIntoPDF(ArrayList<String> words, String title, int size )
 	{
 		
-		String targetFileSave = new String("D:/Downloads/monitorTest.pdf");
+		
+		String targetFileSave = getFileLocation(); // new String("D:/Downloads/monitorTest.pdf");
 		PDDocument document = new PDDocument();
 		
 		try
